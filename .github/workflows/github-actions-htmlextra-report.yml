@@ -1,0 +1,38 @@
+# This workflow will help you to run postman collection using newman and produce an HTML extra test results report
+
+name: Newman Tests
+on: [push, pull_request]
+
+jobs:
+  run-postman-tests:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Install node on the runner
+      - name: Install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
+      # Install the newman command-line utility, also install the html extra reporter
+      - name: Install newman
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-htmlextra
+
+      # Make directory to upload the test results
+      - name: Make directory for uploading the test results
+        run: mkdir -p test_results
+
+      # Run the postman collection
+      - name: Run API Tests
+        run: newman run "Postman Demo.postman_collection.json" -e Production.postman_environment.json -r htmlextra --reporter-htmlextra-export test_results/test_report.html
+
+      # Upload the contents of test results directory to workspace
+      - name: Output the run details
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-run-reports
+          path: test_results
