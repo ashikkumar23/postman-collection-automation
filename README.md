@@ -18,3 +18,6 @@ This repo shows how to run `Postman` collection using `Newman` within the `GitHu
 - Create a `GitHub Actions` workflow ( i.e., `.github/workflows/github-actions-htmlextra-report.yml` ) to run `postman collection` using `Newman` and generate `test report` via `html extra reporter`
 - Upon every `push` and `pull_request`, the workflow would be triggered with `Artifacts` produced during runtime ( i.e., `test-run-reports` ) that contain the html report ( i.e., `test_report.html` )
 - Or, the simplest way is to fork the repository https://github.com/ashikkumar23/postman-reports, make a small change and push the changes to see workflow getting triggered with the generation of html report ( i.e., `test_report.html` )
+
+## 🚀 Sample Result:
+![img.png](img.png)
