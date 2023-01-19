@@ -1,7 +1,11 @@
 # This workflow will help you to run postman collection using newman and produce an HTML extra test results report
 
 name: Newman Tests
-on: [push, pull_request]
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
 
 jobs:
   run-postman-tests:
